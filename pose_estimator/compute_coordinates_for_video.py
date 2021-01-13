@@ -245,7 +245,7 @@ if __name__ == "__main__":
     img_dir = './datasets/train_B'  # Change this line into where your video frames are stored
     pose_dir = img_dir.replace('train_B', 'train_A')
     pose_npy_name = img_dir.replace('train_B', 'poses.npy')
-    if nor os.path.isdir(pose_dir):
+    if not os.path.isdir(pose_dir):
         os.mkdir(pose_dir)
         
     model = load_model('./pose_estimator/pose_estimator.h5')
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     
     pose_cords = []
     for item in tqdm(img_list):
-        img = imread(os.path.join(img_dir, item)
+        img = imread(os.path.join(img_dir, item))
         cord = cordinates_from_image_file(img, model=model)
         pose_cords.append(cord)
         color,_ = draw_pose_from_cords(cord, im_shape)
